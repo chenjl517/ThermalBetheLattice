@@ -1,0 +1,7 @@
+matplotlib==3.10.1
+mpi4py==4.0.3
+numpy==2.2.3
+opt_einsum==3.4.0
+scipy==1.15.2
+torch==2.6.0+cu126
+tqdm==4.67.1

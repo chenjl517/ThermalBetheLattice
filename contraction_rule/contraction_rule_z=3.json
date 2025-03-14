@@ -1,0 +1,166 @@
+{
+    "permutation_rule": {
+        "0": {
+            "1_forward": "abcde, de, b,c -> bceda",
+            "2_forward": "fghij, ij,if, g,h -> fighj",
+            "1_backward": "bceda, de, b,c -> abcde",
+            "2_backward": "fighj, ij,if, g,h -> fghij",
+            "1_outer": [
+                1,
+                2
+            ],
+            "2_outer": [
+                1,
+                2
+            ],
+            "1_crossing": [
+                4
+            ],
+            "2_crossing": [
+                4,
+                0
+            ],
+            "permuted_indices_1": [
+                1,
+                2,
+                4,
+                3,
+                0
+            ],
+            "permuted_indices_2": [
+                0,
+                3,
+                1,
+                2,
+                4
+            ]
+        },
+        "1": {
+            "1_forward": "abcde, dc, db, a,c -> acedb",
+            "2_forward": "fghij, ih, f,h -> gifhj",
+            "1_backward": "acedb, dc, db, a,c -> abcde",
+            "2_backward": "gifhj, ih, f,h -> fghij",
+            "1_outer": [
+                0,
+                2
+            ],
+            "2_outer": [
+                0,
+                2
+            ],
+            "1_crossing": [
+                2,
+                1
+            ],
+            "2_crossing": [
+                2
+            ],
+            "permuted_indices_1": [
+                0,
+                2,
+                4,
+                3,
+                1
+            ],
+            "permuted_indices_2": [
+                1,
+                3,
+                0,
+                2,
+                4
+            ]
+        },
+        "2": {
+            "1_forward": "abcde, dc, a,b -> abedc",
+            "2_forward": "fghij, f,g -> hifgj",
+            "1_backward": "abedc, dc, a,b -> abcde",
+            "2_backward": "hifgj, f,g -> fghij",
+            "1_outer": [
+                0,
+                1
+            ],
+            "2_outer": [
+                0,
+                1
+            ],
+            "1_crossing": [
+                2
+            ],
+            "2_crossing": [],
+            "permuted_indices_1": [
+                0,
+                1,
+                4,
+                3,
+                2
+            ],
+            "permuted_indices_2": [
+                2,
+                3,
+                0,
+                1,
+                4
+            ]
+        }
+    },
+    "rho_1s": "abcde, abcle, a,b,c -> dl",
+    "verify_canonical_rule": {
+        "0": "abcde, lbcde, b,c -> al",
+        "1": "abcde, alcde, a,c -> bl",
+        "2": "abcde, ablde, a,b -> cl"
+    },
+    "gevp_matvec_rule": {
+        "0": "abcde, fghde, b,c, g,h, bg,ch -> af",
+        "1": "abcde, fghde, a,c, f,h, af,ch -> bg",
+        "2": "abcde, fghde, a,b, f,g, af,bg -> ch"
+    },
+    "canonical_gague_fixing_rule": "abcde, ka,lb,mc -> klmde",
+    "gevp_eigenvalue_rule": "abcde, abcde, a,b,c -> ",
+    "rho_2s": {
+        "0": {
+            "einsum_str": "abcde, de,  b, c,  a,  aghij, ij,ia,  g, h, fbcke, ke,  b, c,  f,  fghlj, lj,lf,  g, h -> id kl",
+            "1_crossing": [
+                4
+            ],
+            "2_crossing": [
+                4,
+                0
+            ],
+            "3_crossing": [
+                4
+            ],
+            "4_crossing": [
+                4,
+                0
+            ]
+        },
+        "1": {
+            "einsum_str": "abcde, dc, db,  a, c,  b,  fbhij, ih,  f, h, agcke, kc,kg,  a, c,  g,  fghlj, lh,  f, h -> id kl",
+            "1_crossing": [
+                2,
+                1
+            ],
+            "2_crossing": [
+                2
+            ],
+            "3_crossing": [
+                2,
+                1
+            ],
+            "4_crossing": [
+                2
+            ]
+        },
+        "2": {
+            "einsum_str": "abcde, dc,  a, b,  c,  fgcij,   f, g, abhke, kh,  a, b,  h,  fghlj,   f, g -> id kl",
+            "1_crossing": [
+                2
+            ],
+            "2_crossing": [],
+            "3_crossing": [
+                2
+            ],
+            "4_crossing": []
+        }
+    }
+}
