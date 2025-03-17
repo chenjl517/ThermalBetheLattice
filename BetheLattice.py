@@ -464,7 +464,7 @@ class BetheLattice:
         self.T1 = oe.contract("abc de, ef ->abc df", self.T1, adjust_chemical_potential_op_normalized)
         self.T2 = oe.contract("abc de, ef ->abc df", self.T2, adjust_chemical_potential_op_normalized)
         
-        self.canonicalize(cano_eps=1e-10, eigen_eps=1e-14, maxiter = 50, version="bp")
+        self.canonicalize(cano_eps=1e-10, eigen_eps=1e-14, maxiter = 50, cano_scheme="bp")
         
     def determine_chemical_potential(self, target_ntot, max_opt_iter=100):
         
