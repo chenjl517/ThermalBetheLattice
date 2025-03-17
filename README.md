@@ -1,13 +1,25 @@
 
 # Thermodynamics of the Hubbard Model on the Bethe Lattice
 
-This code is an implementation of the paper *Thermodynamics of the Hubbard Model on the Bethe Lattice*. It provides a framework for evaluating finite-temperature properties of a nearest-neighbor interaction Hamiltonian defined on a Bethe lattice, supporting arbitrary coordination numbers $z$.
+This code is an implementation of the paper *Thermodynamics of the Hubbard Model on the Bethe Lattice* (https://arxiv.org/abs/2503.11598). It provides a framework for evaluating finite-temperature properties of a nearest-neighbor interaction Hamiltonian defined on a Bethe lattice, supporting arbitrary coordination numbers $z$.
 
 The code prepares the density matrix $\rho(\beta)$ at inverse temperature $\beta$ (aka Thermofield Double State, TFD) using the simple update (+ canonicalization). For fermions, swap gates are used to account for the anti-commutation relations.
 
+If you find our work useful in your research, please consider citing:
+```bib
+@misc{chen2025thermodynamicshubbardmodelbethe,
+      title={Thermodynamics of the Hubbard Model on the Bethe Lattice}, 
+      author={Jia-Lin Chen and Zhen Fan and Bo Zhan and Jiahang Hu and Tong Liu and Junyi Ji and Kang Wang and Hai-Jun Liao and Tao Xiang},
+      year={2025},
+      eprint={2503.11598},
+      archivePrefix={arXiv},
+      primaryClass={cond-mat.str-el},
+      url={https://arxiv.org/abs/2503.11598}, 
+}
+```
+
 ### TODO
 - [ ] add examples
-- [ ] add explanation about simplification of swap gates
 - [ ] code cleanup
 
 ## Usage
@@ -32,9 +44,8 @@ python main_obs.py -prefix test -U 4 -tau 0.05 -Ntau 100 -chi 100
 ```
 Command above reads the checkpoint of the density operator $\rho(\beta)$ from ckp_test and calculates the corresponding physical quantities.
 
-## Technical Notes
+## Technical Details
 
 ### Simplification of Swap Gates
+The following diagram illustrates the simplification process of swap gates:  
 ![Jump Move Simplification](assets/jump-move-simplification.svg)
-
-
