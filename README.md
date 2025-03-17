@@ -40,7 +40,7 @@ Command above prepare the density operator $\rho(\beta)$ for the Hubbard model a
 
 ### Measurement
 ```bash
-python main_obs.py -prefix test -U 4 -tau 0.05 -Ntau 100 -chi 100
+mpiexec -n 4 python main_obs.py -prefix test -U 4 -tau 0.05 -Ntau 100 -chi 100
 ```
 Command above reads the checkpoint of the density operator $\rho(\beta)$ from ckp_test and calculates the corresponding physical quantities.
 
