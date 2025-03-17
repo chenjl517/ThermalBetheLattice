@@ -24,7 +24,6 @@ parser.add_argument('-tau', type=float, default=0.05)
 parser.add_argument('-dmu', type=float, default=0)
 parser.add_argument('-dh', type=float, default=0)
 parser.add_argument('-dhs', type=float, default=0)
-parser.add_argument('-re_measure', type=bool, default=True)
 
 parser.add_argument('-prefix', type=str, default="")
 parser.add_argument('-filling', type=float, default=1)
@@ -99,41 +98,22 @@ if __name__ == "__main__":
             else:
                 obs_item.append(item)
     
-        if args.re_measure:
-            # if len(obs_item) != 4:
-            #     print("(#. T ,FN) not found !")
-            #     obs_item = [np.nan, np.nan, np.nan, np.nan]
-            # else:
-            #     obs_item = [obs_item[0], obs_item[1], obs_item[2], obs_item[3]] 
-            # obs_item = [obs_item[0], obs_item[1], obs_item[2], obs_item[3]] # No., T, FN, mu, 
-            obs_item = [obs_item[3], obs_item[1], obs_item[2]] # mu, T, FN 
-            
-            # xi = bethe_lattice_hubbard.calc_correlation_length()
-            # obs_item.append(xi)
-            
-            bondx, bondy, bondz = bethe_lattice_hubbard.measure_bond_en() 
-            # obs_item[3:6] = bondx.cpu().item(), bondy.cpu().item(), bondz.cpu().item()
-            obs_item += [bondx.cpu().item(), bondy.cpu().item(), bondz.cpu().item()] # 4,5,6
+
+        obs_item = [obs_item[3], obs_item[1], obs_item[2]] # mu, T, FN: 0, 1, 2 
+                    
+        bondx, bondy, bondz = bethe_lattice_hubbard.measure_bond_en() 
+
+        obs_item += [bondx.cpu().item(), bondy.cpu().item(), bondz.cpu().item()] # 3, 4, 5
+    
+        sz_1, sx_1, n_up_1, n_down_1, n_docc_1,   sz_2, sx_2, n_up_2, n_down_2, n_docc_2 = bethe_lattice_hubbard.measure_occupy()
+        obs_item += [sz_1.cpu().item(), sx_1.cpu().item(), n_up_1.cpu().item(), n_down_1.cpu().item(), n_docc_1.cpu().item()] # 6, 7, 8, 9, 10
+        obs_item += [sz_2.cpu().item(), sx_2.cpu().item(), n_up_2.cpu().item(), n_down_2.cpu().item(), n_docc_2.cpu().item()] # 11, 12, 13, 14, 15
         
-            # n_up_1, n_down_1, n_docc_1, n_up_2, n_down_2, n_docc_2 = bethe_lattice_hubbard.measure_occupy()
-            sz_1, sx_1, n_up_1, n_down_1, n_docc_1,   sz_2, sx_2, n_up_2, n_down_2, n_docc_2 = bethe_lattice_hubbard.measure_occupy()
-            obs_item += [sz_1.cpu().item(), sx_1.cpu().item(), n_up_1.cpu().item(), n_down_1.cpu().item(), n_docc_1.cpu().item()] # 7,8,9,10,11
-            obs_item += [sz_2.cpu().item(), sx_2.cpu().item(), n_up_2.cpu().item(), n_down_2.cpu().item(), n_docc_2.cpu().item()] # 12,13,14,15
-            
-            #  0, 1, 2,   3,   4,    5,    6,      7,        8,        9,       10,   11,     12,        13,       14,       15
-            # mu, T, F, E_1, E_2,  E_3, sz_1,   sx_1,   n_up_1, n_down_1, n_docc_1, sz_2,   sx_2,    n_up_2, n_down_2, n_docc_2
-            
-            # obs_item[6:12] = n_up_1.cpu().item(), n_down_1.cpu().item(), n_docc_1.cpu().item(), n_up_2.cpu().item(), n_down_2.cpu().item(), n_docc_2.cpu().item()
-            # obs_item[6:12] = sz_1.cpu().item(), sx_1.cpu().item(), n_docc_1.cpu().item(), sz_2.cpu().item(), sx_2.cpu().item(), n_docc_2.cpu().item()
+        
+        # measure entanglement entropy
+        SE_x, SE_y, SE_z = bethe_lattice_hubbard.measure_entanglement_entropy()
+        obs_item += [SE_x, SE_y, SE_z]
 
-            # measure entanglement entropy
-            SE_x, SE_y, SE_z = bethe_lattice_hubbard.measure_entanglement_entropy()
-            obs_item += [SE_x, SE_y, SE_z]
-
-            
-            # measure correlation length
-            # xi = bethe_lattice_hubbard.measure_correlation_length()
-            # obs_item.append(xi)
 
         return obs_item
 
@@ -155,8 +135,9 @@ if __name__ == "__main__":
         np.savetxt(f"{save_dir}/{model_info}_obs_mpisize={size}.txt", data_obs)
 
 """
-obs format:
-   0, 1, 2,   3,   4,   5,    6,    7,      8,        9,       10,   11,   12,     13,       14,       15    16,   17,   18
-step, T, F, E_1, E_2, E_3, sz_1, sx_1, n_up_1, n_down_1, n_docc_1, sz_2, sx_2, n_up_2, n_down_2, n_docc_2, SE_x, SE_y, SE_z
+#  0, 1, 2,   3,   4,    5,            6,     7,       8,         9,        10,             11,    12,      13,        14,        15
+# mu, T, F, E_1, E_2,  E_3,         sz_1,  sx_1,  n_up_1,  n_down_1,  n_docc_1,           sz_2,  sx_2,  n_up_2,  n_down_2,  n_docc_2
 """
+
+
 
