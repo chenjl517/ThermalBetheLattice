@@ -135,8 +135,8 @@ if __name__ == "__main__":
         np.savetxt(f"{save_dir}/{model_info}_obs_mpisize={size}.txt", data_obs)
 
 """
-#  0, 1, 2,   3,   4,    5,            6,     7,       8,         9,        10,             11,    12,      13,        14,        15
-# mu, T, F, E_1, E_2,  E_3,         sz_1,  sx_1,  n_up_1,  n_down_1,  n_docc_1,           sz_2,  sx_2,  n_up_2,  n_down_2,  n_docc_2
+#  0, 1, 2,   3,   4,    5,            6,     7,       8,         9,        10,             11,    12,      13,        14,        15           16,    17,    18  
+# mu, T, F, E_1, E_2,  E_3,         sz_1,  sx_1,  n_up_1,  n_down_1,  n_docc_1,           sz_2,  sx_2,  n_up_2,  n_down_2,  n_docc_2         SE_x,  SE_y,  SE_z
 """
 
 
